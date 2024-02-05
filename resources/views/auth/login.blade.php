@@ -85,7 +85,22 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            font-family: 'Lexend', sans-serif;
 
         }
+
+        /* Apply the font to the footer as well */
+        .footer span {
+            color: black;
+            font-family: 'Lexend', sans-serif;
+        }
     </style>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+        <div class="container text-center">
+            <span class="text-muted" style="color: black;">&copy; 2023 - {{ date('Y') }}
+                Your Company Name. All rights reserved.</span>
+        </div>
+    </footer>
 @endsection
