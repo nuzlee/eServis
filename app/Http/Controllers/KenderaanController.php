@@ -115,8 +115,6 @@ class KenderaanController extends Controller
             'Jenama.required'   => 'Sila masukkan JENAMA',
             'Model.required'    => 'Sila masukkan MODEL',
 
-
-
             ]);
 
             $kenderaanUpdate = Kenderaan::find($id);
