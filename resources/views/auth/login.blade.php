@@ -196,7 +196,6 @@
         });
     </script>
 
-    <!--Background Image-->
     <style>
         body {
             background-image: url('/images/ioswall.jpg');
@@ -207,10 +206,9 @@
         }
 
         /* Apply the font to the footer as well */
-        .footer {
+        .footer span {
             color: white;
-            /* Change text color to white */
-            font-family: 'Lexend Deca', sans-serif;
+            font-family: 'Lexend', sans-serif;
         }
 
         /* Ensure Particle.js canvas covers the entire screen */
@@ -221,14 +219,14 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Ensure it's behind other content */
         }
     </style>
 
     <!-- Footer -->
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
-            <span class="text-muted">&copy; 2023 - {{ date('Y') }} Your Company Name. All rights reserved.</span>
+            <span class="text-muted" style="color: white;">&copy; 2023 - {{ date('Y') }}
+                Your Company Name. All rights reserved.</span>
         </div>
     </footer>
 @endsection

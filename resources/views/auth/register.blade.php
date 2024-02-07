@@ -203,7 +203,7 @@
         });
     </script>
 
-    <!-- Your existing styles -->
+
     <style>
         body {
             background-image: url('/images/ioswall.jpg');
