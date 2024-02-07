@@ -94,7 +94,7 @@
                     }
                 },
                 "color": {
-                    "value": "#000000"
+                    "value": "#ffffff"
                 },
                 "shape": {
                     "type": "circle",
@@ -134,7 +134,7 @@
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "opacity": 0.4,
                     "width": 1
                 },
@@ -199,18 +199,18 @@
     <!--Background Image-->
     <style>
         body {
-            background-image: url('/images/maintenance.jpg');
+            background-image: url('/images/ioswall.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             font-family: 'Lexend', sans-serif;
-
         }
 
         /* Apply the font to the footer as well */
-        .footer span {
-            color: black;
-            font-family: 'Lexend', sans-serif;
+        .footer {
+            color: white;
+            /* Change text color to white */
+            font-family: 'Lexend Deca', sans-serif;
         }
 
         /* Ensure Particle.js canvas covers the entire screen */
@@ -228,8 +228,7 @@
     <!-- Footer -->
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
-            <span class="text-muted" style="color: black;">&copy; 2023 - {{ date('Y') }}
-                Your Company Name. All rights reserved.</span>
+            <span class="text-muted">&copy; 2023 - {{ date('Y') }} Your Company Name. All rights reserved.</span>
         </div>
     </footer>
 @endsection
