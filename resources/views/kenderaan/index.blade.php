@@ -51,14 +51,10 @@
                                         <td class="text-nowrap" style="width: 8rem;">
                                             {{-- <td class="text-center"> --}}
                                             @if (Auth::user()->peranan == 1)
-                                                <form action="{{ route('kenderaan.destroy', $data->id) }}" method="POST">
+                                                <form id="deleteForm_{{ $data->id }}"
+                                                    action="{{ route('kenderaan.destroy', $data->id) }}" method="POST">
 
                                                     <a class="btn" href="{{ route('kenderaan.edit', $data->id) }}">
-
-                                                        {{-- <td class="text-center"> --}}
-                                                        {{-- <button class="btn btn-warning" href=" "><i
-                                                    class="fas fa-edit"></i></button> --}}
-
                                                         <lord-icon src="https://cdn.lordicon.com/xpgofwru.json"
                                                             trigger="hover" colors="primary:#3080e8"
                                                             style="width:28px;height:28px">
@@ -68,14 +64,8 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button class="btn" type="submit"
-                                                        onclick="return confirm('{{ __('Anda Pasti Untuk Padam Rekod Ini?') }}')">
-                                                        {{-- delete confirmation with Javascript Window.confirm() --}}
-
-
-                                                        {{-- <button class="btn btn-danger" href=" "><i
-                                                    class="fas fa-trash"></i></button> --}}
-
+                                                    <button class="btn" type="button"
+                                                        onclick="confirmDelete('{{ $data->id }}')">
                                                         <lord-icon src="https://cdn.lordicon.com/skkahier.json"
                                                             trigger="hover" colors="primary:#e83a30"
                                                             style="width:28px;height:28px">
@@ -96,4 +86,28 @@
 
         </div>
     </div>
+
+    <!-- Include SweetAlert library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        // Define the confirmDelete function
+        function confirmDelete(id) {
+            // Display SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Anda Pasti Untuk Padam Rekod Ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Padam',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    document.getElementById('deleteForm_' + id).submit();
+                }
+            });
+        }
+    </script>
 @endsection

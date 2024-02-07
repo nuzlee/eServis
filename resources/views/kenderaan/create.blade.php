@@ -15,18 +15,16 @@
                     {{ $error }}<br>
                 @endforeach
             </div>
-
         @endif
 
-        <form role="form" method="POST" action="{{ route('kenderaan.store') }}" enctype="multipart/form-data">
+        <form id="kenderaanForm" role="form" method="POST" action="{{ route('kenderaan.store') }}"
+            enctype="multipart/form-data">
             @csrf
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control" id="input
-                        Jenis" name="Jenis" type="text"
-                            placeholder="Jenis" />
+                        <input class="form-control" id="inputJenis" name="Jenis" type="text" placeholder="Jenis" />
                         <label for="inputJenis">Jenis Kenderaan</label>
                     </div>
                 </div>
@@ -48,21 +46,34 @@
                 </div>
             </div>
 
-
-
             <!-- Butang Submit -->
-
             <div class="card-footer">
                 <a class="btn btn-sm btn-secondary" type="button" href="{{ route('kenderaan.index') }}">Batal</a>
-
-                <button class="btn" type="submit"
-                    onclick="return confirm('{{ __('Anda Pasti Untuk Padam Rekod Ini?') }}')">
-                    <button class="btn btn-sm btn-primary" type="submit">Simpan</button>
+                <button class="btn btn-sm btn-primary" type="button" id="submitBtn">Simpan</button>
             </div>
 
         </form>
 
     </div>
 
-
+    <!-- Include SweetAlert library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            Swal.fire({
+                text: "Anda pasti untuk simpan rekod ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Simpan',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form using JavaScript
+                    document.getElementById('kenderaanForm').submit();
+                }
+            });
+        });
+    </script>
 @endsection

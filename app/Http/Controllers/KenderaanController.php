@@ -121,19 +121,36 @@ class KenderaanController extends Controller
 
             $kenderaanUpdate = Kenderaan::find($id);
 
+            // Check if the record exists
+        if (!$kenderaanUpdate) {
+        return redirect()->route('kenderaan.index')->with('error', 'Rekod tidak dijumpai');
+        }
+
         //nama->database = $request->form
 
-            $kenderaanUpdate->kenderaan = $request->get('Kenderaan');
-            $kenderaanUpdate->jenis     = $request->Jenis;
-            $kenderaanUpdate->jenama    = $request->Jenama;
-            $kenderaanUpdate->model     = $request->Model;
+            // $kenderaanUpdate->kenderaan = $request->get('Kenderaan');
+            // $kenderaanUpdate->jenis     = $request->Jenis;
+            // $kenderaanUpdate->jenama    = $request->Jenama;
+            // $kenderaanUpdate->model     = $request->Model;
 
 
 
-            $kenderaan->save();
+            // $kenderaan->save();
 
-            return redirect()->route('kenderaan.index')
-                                    ->with('Maklumat Berjaya di Simpan');
+            // return redirect()->route('kenderaan.index')
+            //                         ->with('Maklumat Berjaya di Simpan');
+
+        // Update the attributes
+        $kenderaanUpdate->jenis   = $request->input('Jenis');
+        $kenderaanUpdate->jenama  = $request->input('Jenama');
+        $kenderaanUpdate->model   = $request->input('Model');
+
+        // Save the updated record
+        $kenderaanUpdate->save();
+
+        return redirect()->route('kenderaan.index')
+                        ->with('success', 'Maklumat Berjaya di Simpan');
+
         }
 
 
@@ -142,6 +159,10 @@ class KenderaanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kenderaan = Kenderaan::find($id);
+        $kenderaan ->delete();
+        return redirect()
+                ->route('kenderaan.index')
+                ->with('success', 'Data Kenderaan berjaya dipadam');
     }
 }
