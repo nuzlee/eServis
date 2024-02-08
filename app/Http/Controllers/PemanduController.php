@@ -17,7 +17,8 @@ class PemanduController extends Controller
      */
     public function index()
     {
-        $dataPemandu = Pemandu::all();
+        // $dataPemandu = Pemandu::all();
+        $dataPemandu = Pemandu::orderBy('id','asc')->paginate(5);
         return view('pemandu.index',compact('dataPemandu'));
     }
 

@@ -54,35 +54,33 @@
                                         </td>
                                         <td class="text-center">RM {{ $data->harga }}</td>
 
-                                        <!-- Button EDIT & DELETE -->
-                                        <td class="text-nowrap" style="width: 8rem;">
-
-                                            <form action="{{ route('servis.destroy', $data->id) }}" method="POST">
+                                        <!-- Tindakan Column with Edit and Delete Buttons -->
+                                        <td class="text-center" style="width: 10%;">
+                                            <div class="d-flex justify-content-between">
                                                 <a class="btn" href="{{ route('servis.edit', $data->id) }}">
-
                                                     <lord-icon src="https://cdn.lordicon.com/xpgofwru.json" trigger="hover"
                                                         colors="primary:#3080e8" style="width:28px;height:28px">
-                                                    </lord-icon></a>
-
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn" type="submit"
-                                                    onclick="return confirm('{{ __('Anda Pasti Untuk Padam Rekod Ini?') }}')">
-                                                    {{-- delete confirmation with Javascript Window.confirm() --}}
-
-                                                    <lord-icon src="https://cdn.lordicon.com/skkahier.json" trigger="hover"
-                                                        colors="primary:#e83a30" style="width:28px;height:28px">
                                                     </lord-icon>
-                                                </button>
-                                            </form>
-                                        </td>
+                                                </a>
+                                                <form action="{{ route('servis.destroy', $data->id) }}" method="POST"
+                                                    id="deleteForm_{{ $data->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn" type="button"
+                                                        onclick="confirmDelete('{{ $data->id }}', event)">
+                                                        <lord-icon src="https://cdn.lordicon.com/skkahier.json"
+                                                            trigger="hover" colors="primary:#e83a30"
+                                                            style="width:28px;height:28px"></lord-icon>
+                                                    </button>
 
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
-                        <!--PAGINATION-->
+                        <!-- pagination -->
                         {{ $dataServis->links('vendor.pagination.bootstrap-5') }}
                     </div>
                 </div>
@@ -91,4 +89,39 @@
 
         </div>
     </div>
+
+    <!-- Include SweetAlert library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        // Define the confirmDelete function
+        function confirmDelete(id, event) {
+            // Prevent default form submission behavior
+            event.preventDefault();
+            // Display SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Anda Pasti Untuk Padam Rekod Ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Padam',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    document.getElementById('deleteForm_' + id).submit();
+                    // Show success message after deletion
+                    Swal.fire({
+                        title: 'Berjaya!',
+                        text: 'Rekod berjaya dipadam.',
+                        icon: 'success',
+                        timer: 3000, // 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

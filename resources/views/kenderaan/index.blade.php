@@ -106,6 +106,15 @@
                 if (result.isConfirmed) {
                     // If confirmed, submit the form
                     document.getElementById('deleteForm_' + id).submit();
+                    // Show success message after deletion
+                    Swal.fire({
+                        title: 'Berjaya!',
+                        text: 'Rekod berjaya dipadam.',
+                        icon: 'success',
+                        timer: 3000, // 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
                 }
             });
         }

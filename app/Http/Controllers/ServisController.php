@@ -134,10 +134,11 @@ class ServisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $servis)
-    {
-        $minyak = Minyak::find($servis);
-        $minyak->delete();
-        return redirect()->route('minyak.index')->with('success', 'Data Minyak berjaya dipadam');
-    }
+    public function destroy(string $servisId)
+{
+    $servis = Servis::find($servisId);
+    $servis->delete();
+    return redirect()->route('servis.index')->with('success', 'Data Servis berjaya dipadam');
+}
+
 }
